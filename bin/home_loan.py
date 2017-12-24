@@ -28,6 +28,11 @@ class HomeLoan:
         yValues = [self.loan_balance(p) for p in xValues]
         self.make_plot(xValues, yValues, 'Debt Value ($)', 'Time (Months)', 'Debt Repayment')
 
+    def plot_cummulative_interest(self,p):
+        xValues = self.create_array(p)
+        yValues = [self.cummulative_interest(p) for p in xValues]
+        self.make_plot(xValues, yValues, 'Cummulative Interest', 'Time (Months)', 'Interest Paid')
+
     def r(self):
         return self.i / 12
 
