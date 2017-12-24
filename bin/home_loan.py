@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 class HomeLoan:
 
@@ -13,19 +14,27 @@ class HomeLoan:
         print(self.principal * (num/den))
         return self.principal * (num/den) 
 
+    def loan_balance(self,p):
+        num =  (1 + self.r()) ** self.n() - (1 + self.r()) ** p
+        den =  (1 + self.r()) ** self.n() - 1
+        return self.principal * (num/den)
+
+    def plot_repayments(self, p):
+        xValues = self.create_array(p)
+        yValues = [self.loan_balance(p) for p in xValues]
+        plt.plot(xValues, yValues)
+        plt.ylabel('Debt Value')
+        plt.xlabel('Time (Months)')
+        plt.show()
+    
     def r(self):
         return self.i / 12
 
     def n(self):
         return self.loan_period * 12.0
 
-    def loan_balance(self,p):
-        num =  (1 + self.r()) ** self.n() - (1 + self.r()) ** p
-        den =  (1 + self.r()) ** self.n() - 1
-        return self.principal * (num/den)
-
-    def plot_repayments
-
+    def create_array(self,p):
+        return np.add(range(p), 1)
 
 if __name__ == "__main__": 
-    HomeLoan(500000, 0.0465, 30).monthly_repayment()
+    HomeLoan(500000, 0.0465, 30).plot_repayments(12*30)
