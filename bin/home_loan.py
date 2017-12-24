@@ -14,10 +14,14 @@ class HomeLoan:
         print(self.principal * (num/den))
         return self.principal * (num/den) 
 
-    def loan_balance(self,p):
+    def loan_balance(self, p):
         num =  (1 + self.r()) ** self.n() - (1 + self.r()) ** p
         den =  (1 + self.r()) ** self.n() - 1
         return self.principal * (num/den)
+
+    def cummulative_interest(self, p):
+        return (self.principal*self.r - monthly_repayment())* \
+                    ((1 + self.r()) ** p - 1)/self.r() + monthly_repayment * p
 
     def plot_repayments(self, p):
         xValues = self.create_array(p)
