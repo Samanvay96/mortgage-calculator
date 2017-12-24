@@ -22,11 +22,8 @@ class HomeLoan:
     def plot_repayments(self, p):
         xValues = self.create_array(p)
         yValues = [self.loan_balance(p) for p in xValues]
-        plt.plot(xValues, yValues)
-        plt.ylabel('Debt Value')
-        plt.xlabel('Time (Months)')
-        plt.show()
-    
+        self.make_plot(xValues, yValues, 'Debt Value ($)', 'Time (Months)', 'Debt Repayment')
+
     def r(self):
         return self.i / 12
 
@@ -35,6 +32,13 @@ class HomeLoan:
 
     def create_array(self,p):
         return np.add(range(p), 1)
+
+    def make_plot(self, x, y, xlabel, ylabel, title):
+        plt.plot(xValues, yValues)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        plt.title(title)
+        plt.show()
 
 if __name__ == "__main__": 
     HomeLoan(500000, 0.0465, 30).plot_repayments(12*30)
