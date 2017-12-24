@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 class HomeLoan:
 
     def __init__(self, principal, interest_rate, loan_period):
@@ -16,6 +18,14 @@ class HomeLoan:
 
     def n(self):
         return self.loan_period * 12.0
+
+    def loan_balance(self,p):
+        num =  (1 + self.r()) ** self.n() - (1 + self.r()) ** p
+        den =  (1 + self.r()) ** self.n() - 1
+        return self.principal * (num/den)
+
+    def plot_repayments
+
 
 if __name__ == "__main__": 
     HomeLoan(500000, 0.0465, 30).monthly_repayment()
