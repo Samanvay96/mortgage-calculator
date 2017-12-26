@@ -1,2 +1,6 @@
 # mortgage-calculator
-Tools to model effects of variable interest rates, lump sum payments and repayment amount on mortgage payment
+Interactive app to visualise total outstanding loan balance over time
+
+## Run Instructions 
+1. Make sure you have python 3 and bokeh is installed (`pip install bokeh`) 
+2. Navigate to bin and run `bokeh serve --show interactive_home_loan.py`
