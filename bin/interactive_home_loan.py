@@ -1,12 +1,3 @@
-''' Present an interactive function explorer with slider widgets.
-Scrub the sliders to change the properties of the ``sin`` curve, or
-type into the title text box to update the title of the plot.
-Use the ``bokeh serve`` command to run the example by executing:
-    bokeh serve sliders.py
-at your command prompt. Then navigate to the URL
-    http://localhost:5006/sliders
-in your browser.
-'''
 import numpy as np
 import home_loan as hl
 
@@ -24,26 +15,20 @@ y = [hl.loan_balance(500000, 0.05, 30, p) for p in x]
 source = ColumnDataSource(data=dict(x=x, y=y))
 
 # Set up plot
-plot = figure(plot_height=800, plot_width=700, title="Home loan",
+plot = figure(plot_height=600, plot_width=700, title="Outstanding Loan Balance w.r.t Time",
               tools="crosshair,pan,reset,save,wheel_zoom",
-              x_range=[0, 400], y_range=[0, 500000])
+              x_range=[0, 500], y_range=[0, 500000*2])
 
 plot.line('x', 'y', source=source, line_width=3, line_alpha=0.6)
-
+plot.xaxis.axis_label = 'Time (Months)'
+plot.yaxis.axis_label = 'Outstanding Amount ($)'
 
 # Set up widgets
-text = TextInput(title="title", value='Home Loan')
 interest_rate = Slider(title="Interest Rate", value=0.05, start=0.01, end=0.1, step=0.01)
 principal_amount = Slider(title="Principal ($)", value=500000, start=50000, end=500000*2, step=50000)
 t = Slider(title="Loan Period (Years)", value=30, start=10, end=40, step=1)
 
-
 # Set up callbacks
-def update_title(attrname, old, new):
-    plot.title.text = text.value
-
-text.on_change('value', update_title)
-
 def update_data(attrname, old, new):
 
     # Get the current slider values
@@ -62,7 +47,6 @@ for w in [interest_rate, principal_amount, t]:
 
 
 # Set up layouts and add to document
-inputs = widgetbox(text, interest_rate, principal_amount, t)
+inputs = widgetbox(interest_rate, principal_amount, t)
 
 curdoc().add_root(row(plot, inputs, width=800))
-curdoc().title = "Sliders"
