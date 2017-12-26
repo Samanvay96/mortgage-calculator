@@ -33,7 +33,7 @@ def cummulative_interest(principal, i, loan_period, p):
 #        self.make_plot(xValues, yValues, 'Cummulative Interest', 'Time (Months)', 'Interest Paid')
 
 def r(i):
-    return self.i / 12
+    return i / 12
 
 def n(loan_period):
     return loan_period * 12.0
